@@ -1,0 +1,26 @@
+table {
+  margin: 1em auto;
+}
+td {
+  height: 70px;
+  width: 70px;
+  border: 1px solid;
+  border-color: goldenrod;
+  text-align: center;
+}
+td:first-child {
+  border-left: solid;
+  border-color: goldenrod;
+}
+td:nth-child(3n) {
+  border-right: solid;
+  border-color: goldenrod;
+}
+tr:first-child {
+  border-top: solid;
+  border-color: goldenrod;
+}
+tr:nth-child(3n) td {
+  border-bottom: solid;
+  border-color: goldenrod;
+}

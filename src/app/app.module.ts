@@ -7,14 +7,16 @@ import { SmallSudokuModule } from './small-sudoku/small-sudoku.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    // declarations
+    AppComponent,
   ],
   imports: [
+    // imports
     BrowserModule,
     BrowserAnimationsModule,
-    SmallSudokuModule
+    SmallSudokuModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
