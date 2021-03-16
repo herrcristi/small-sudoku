@@ -1,0 +1,12 @@
+<!-- 
+  create a grid 
+-->
+<div *ngFor="let __l of [].constructor(rows); let l = index">
+  <div class="row">
+    <div *ngFor="let __c of [].constructor(cols); let c = index">
+      <div class="col">
+        <app-small-sudoku-grid-cell></app-small-sudoku-grid-cell>
+      </div>
+    </div>
+  </div>
+</div>
