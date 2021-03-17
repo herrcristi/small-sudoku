@@ -1,17 +1,8 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  SimpleChange,
-  SimpleChanges,
-  EventEmitter,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { GridCell } from '../../grid-cell';
 
 @Component({
   selector: 'app-small-sudoku-grid-cell',
@@ -22,11 +13,9 @@ export class SmallSudokuGridCellComponent implements OnInit, OnDestroy, OnChange
   /**
    * members
    */
-  @Input() row: number;
-  @Input() col: number;
-  @Input() val: number;
+  @Input() cell: GridCell;
 
-  @Output() valChanged: EventEmitter<number> = new EventEmitter<number>();
+  @Output() cellChanged: EventEmitter<GridCell> = new EventEmitter<GridCell>();
 
   /**
    * use a form control for the input
@@ -51,13 +40,14 @@ export class SmallSudokuGridCellComponent implements OnInit, OnDestroy, OnChange
     for (const propName in changes) {
       if (changes.hasOwnProperty(propName)) {
         switch (propName) {
-          case 'val': {
+          case 'cell': {
             // since the value is changed by the parent
             // set the formControl to proper value
             // and inform not to emit a new event
-            //console.log('changed ' + changes[propName].currentValue);
+            //console.log('changed ' + JSON.stringify(changes[propName].currentValue));
             if (this.control) {
-              this.control.setValue(changes[propName].currentValue, { emitEvent: false });
+              const newCellVal = (changes[propName].currentValue as GridCell).val;
+              this.control.setValue(newCellVal, { emitEvent: false });
             }
           }
         }
@@ -70,14 +60,17 @@ export class SmallSudokuGridCellComponent implements OnInit, OnDestroy, OnChange
    */
   ngOnInit(): void {
     // create the form control
-    this.control = new FormControl(this.val);
+    this.control = new FormControl(this.cell.val);
 
     // subscribe to it
     this.controlSubscription$ = this.control.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe((newVal) => {
         //console.log('subscription ' + newVal);
-        this.valChanged.emit(newVal);
+
+        // trigger the change event
+        this.onValChanged(+newVal);
+
         // simulate a disable enable to remove focus
         this.control.disable();
         this.control.enable();
@@ -93,5 +86,17 @@ export class SmallSudokuGridCellComponent implements OnInit, OnDestroy, OnChange
       this.controlSubscription$.unsubscribe();
       this.controlSubscription$ = null;
     }
+  }
+
+  /**
+   * on value changed
+   */
+  onValChanged(newVal: number): void {
+    // validate first TODO remove 0-10 validation and instead use a class for errors
+    newVal = isNaN(newVal) || newVal <= 0 || newVal >= 10 ? null : newVal;
+
+    // trigger the change event
+    const newCell: GridCell = new GridCell(this.cell.row, this.cell.col, newVal);
+    this.cellChanged.emit(newCell);
   }
 }

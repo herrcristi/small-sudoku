@@ -21,7 +21,7 @@
 
   <div class="row">
     <div class="container">
-      <app-small-sudoku-grid [sudoku]="sudoku"></app-small-sudoku-grid>
+      <app-small-sudoku-grid [sudoku]="sudoku" (cellChanged)="onNewVal($event)"></app-small-sudoku-grid>
     </div>
   </div>
 </div>

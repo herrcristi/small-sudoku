@@ -2,9 +2,9 @@
   create a grid 
 -->
 <table>
-  <tr *ngFor="let __l of [].constructor(rows); let row = index">
-    <td *ngFor="let __c of [].constructor(cols); let col = index">
-      <app-small-sudoku-grid-cell [row]="row" [col]="col" [val]="sudoku" (valChanged)="onNewVal($event)">
+  <tr *ngFor="let __l of [].constructor(sudoku.length); let row = index">
+    <td *ngFor="let __c of [].constructor(sudoku.length); let col = index">
+      <app-small-sudoku-grid-cell [cell]="sudoku[row][col]" (cellChanged)="onNewVal($event)">
       </app-small-sudoku-grid-cell>
     </td>
   </tr>

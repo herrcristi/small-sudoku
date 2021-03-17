@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GridCell } from '../../grid-cell';
 
 /**
  * Main Small Sudoku component
@@ -12,12 +13,20 @@ export class SmallSudokuComponent implements OnInit {
   /**
    * members
    */
-  sudoku: number = 0; // TODO make it a proper struct
+  public level: number = 3; // the sudoku grid level
+  sudoku: Array<Array<GridCell>>;
 
   /**
    * constructor
    */
-  constructor() {}
+  constructor() {
+    // create an array of array
+    this.sudoku = [...new Array<Array<GridCell[]>>(this.level * this.level)].map((_, row) => {
+      return [...new Array<GridCell[]>(this.level * this.level)].map((_, col) => {
+        return new GridCell(row, col, null);
+      });
+    });
+  }
 
   /**
    * ng on init
@@ -27,28 +36,41 @@ export class SmallSudokuComponent implements OnInit {
   /**
    * on new
    */
-  onNew(): void {
-    this.sudoku = 1;
+  onNew(val: number = null): void {
+    // create an array of array
+    this.sudoku.forEach((line, row) => {
+      line.forEach((cell, col) => {
+        this.sudoku[row][col] = new GridCell(row, col, val);
+      });
+    });
   }
 
   /**
    * on load
    */
   onLoad(): void {
-    this.sudoku = 2;
+    // TODO
   }
 
   /**
    * on save
    */
   onSave(): void {
-    this.sudoku = 3;
+    // TODO
   }
 
   /**
    * on undo
    */
   onUndo(): void {
-    this.sudoku = 0;
+    // TODO;
+  }
+
+  /**
+   * on new cell value
+   */
+  onNewVal(newVal: GridCell): void {
+    this.sudoku[newVal.row][newVal.col] = newVal;
+    //console.log('received newVal ' + JSON.stringify(newVal));
   }
 }

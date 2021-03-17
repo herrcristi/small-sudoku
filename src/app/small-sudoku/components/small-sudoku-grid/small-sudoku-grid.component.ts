@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { GridCell } from '../../grid-cell';
 
 /**
  * Small Sudoku Grid
@@ -12,11 +13,8 @@ export class SmallSudokuGridComponent implements OnInit {
   /**
    * members
    */
-  @Input() sudoku: number;
-
-  public gridLevel: number = 3; // the sudoku grid level
-  public rows: number;
-  public cols: number;
+  @Input() sudoku: Array<Array<GridCell>>;
+  @Output() cellChanged: EventEmitter<GridCell> = new EventEmitter<GridCell>();
 
   /**
    * constructor
@@ -26,16 +24,12 @@ export class SmallSudokuGridComponent implements OnInit {
   /**
    * ng on init
    */
-  ngOnInit(): void {
-    const levels = this.gridLevel * this.gridLevel;
-    this.rows = levels;
-    this.cols = levels;
-  }
+  ngOnInit(): void {}
 
   /**
    * on new cell value
    */
-  onNewVal(newVal): void {
-    console.log('received newVal ' + newVal);
+  onNewVal(newVal: GridCell): void {
+    this.cellChanged.emit(newVal);
   }
 }
