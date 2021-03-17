@@ -15,16 +15,20 @@
     </li>
   </ul>
 </nav>
-<!-- the sudoku grid -->
+
+<!-- the sudoku-->
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">&nbsp;</div>
   </div>
 
+  <!-- sudoku grid -->
   <div class="row">
     <div class="col-8">
       <app-small-sudoku-grid [sudoku]="sudoku" (cellChanged)="onNewVal($event)"></app-small-sudoku-grid>
     </div>
+
+    <!-- undo sequence -->
     <div class="col-4">
       <span *ngFor="let item of undoSequence" class="undoItem">
         <app-small-sudoku-undo-item [item]="item" [level]="level"></app-small-sudoku-undo-item>

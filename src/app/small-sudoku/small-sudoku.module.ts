@@ -11,6 +11,11 @@ import { SmallSudokuGridCellComponent } from './components/small-sudoku-grid-cel
 import { SmallSudokuUndoItemComponent } from './components/small-sudoku-undo-item/small-sudoku-undo-item.component';
 
 /**
+ * service
+ */
+import { SmallSudokuService } from './small-sudoku.service';
+
+/**
  * Small Sudoku Module
  *
  * which contains all the components to help solve a sudoku
@@ -33,6 +38,10 @@ import { SmallSudokuUndoItemComponent } from './components/small-sudoku-undo-ite
   exports: [
     // exports
     SmallSudokuMainComponent,
+  ],
+  providers: [
+    // providers
+    SmallSudokuService,
   ],
 })
 export class SmallSudokuModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridCell } from '../../grid-cell';
+import { SmallSudokuService } from '../../small-sudoku.service';
 
 /**
  * Main Small Sudoku component
@@ -24,7 +25,10 @@ export class SmallSudokuMainComponent implements OnInit {
   /**
    * constructor
    */
-  constructor() {
+  constructor(
+    // injections
+    private sudokuService: SmallSudokuService
+  ) {
     // create an array of array
     this.sudoku = [...new Array<Array<GridCell[]>>(this.level * this.level)].map((_, row) => {
       return [...new Array<GridCell[]>(this.level * this.level)].map((_, col) => {
@@ -34,6 +38,9 @@ export class SmallSudokuMainComponent implements OnInit {
 
     // create undo sequence
     this.undoSequence = [...new Array<GridCell>(0)];
+
+    // update sudoku cell options
+    this.sudokuService.updateOptions(this.sudoku);
   }
 
   /**
@@ -54,6 +61,9 @@ export class SmallSudokuMainComponent implements OnInit {
 
     // reset the undo sequence too
     this.undoSequence = [...new Array<GridCell>(0)];
+
+    // update sudoku cell options
+    this.sudokuService.updateOptions(this.sudoku);
   }
 
   /**
@@ -61,7 +71,13 @@ export class SmallSudokuMainComponent implements OnInit {
    */
   onLoad(): void {
     // TODO
+    this.onNew();
+
+    // reset undo sequence
     this.undoSequence = [...new Array<GridCell>(0)];
+
+    // update sudoku cell options
+    this.sudokuService.updateOptions(this.sudoku);
   }
 
   /**
@@ -76,9 +92,11 @@ export class SmallSudokuMainComponent implements OnInit {
    */
   onUndo(): void {
     if (this.undoSequence.length > 0) {
+      // clear cell
       const lastUndoCell = this.undoSequence[this.undoSequence.length - 1];
       this.sudoku[lastUndoCell.row][lastUndoCell.col] = new GridCell(lastUndoCell.row, lastUndoCell.col, null);
 
+      // remove from undo sequence
       this.undoSequence.pop();
     }
   }
@@ -91,10 +109,14 @@ export class SmallSudokuMainComponent implements OnInit {
       // set the cell
       this.sudoku[newVal.row][newVal.col] = newVal;
 
-      // if valid add to undo seq
       if (newVal.val) {
+        // if valid add to undo seq
         this.undoSequence.push(new GridCell(newVal.row, newVal.col, newVal.val));
+
+        // update sudoku cell options
+        this.sudokuService.updateOptions(this.sudoku);
       }
+
       //console.log('received newVal ' + JSON.stringify(newVal));
     }
   }
