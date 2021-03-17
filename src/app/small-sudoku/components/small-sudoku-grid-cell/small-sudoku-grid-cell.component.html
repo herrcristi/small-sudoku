@@ -1,3 +1,6 @@
-.
+&nbsp;
 <br />
-<input type="text" [formControl]="control" />
+<!-- if value is set just display it -->
+<div *ngIf="cell.val; else input_content" class="cell">{{ cell.val }}</div>
+<!-- else add an input -->
+<ng-template #input_content> <input type="text" [formControl]="control" /></ng-template>

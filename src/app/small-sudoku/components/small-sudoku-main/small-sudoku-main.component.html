@@ -1,27 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand"> Small Sudoku Helper</a>
   <ul class="navbar-nav">
-    <li>
+    <li class="nav-item">
       <a class="nav-link" (click)="onNew()">New</a>
     </li>
-    <li>
+    <li class="nav-item">
       <a class="nav-link" (click)="onLoad()">Load</a>
     </li>
-    <li>
+    <li class="nav-item">
       <a class="nav-link" (click)="onSave()">Save</a>
     </li>
-    <li>
+    <li class="nav-item">
       <a class="nav-link" (click)="onUndo()">Undo</a>
     </li>
   </ul>
 </nav>
 <!-- the sudoku grid -->
-<div class="container">
-  <div class="row">&nbsp;</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">&nbsp;</div>
+  </div>
 
   <div class="row">
-    <div class="container">
+    <div class="col-8">
       <app-small-sudoku-grid [sudoku]="sudoku" (cellChanged)="onNewVal($event)"></app-small-sudoku-grid>
     </div>
+    <div class="col-4">
+      <span *ngFor="let item of undoSequence" class="undoItem">
+        <app-small-sudoku-undo-item [item]="item" [level]="level"></app-small-sudoku-undo-item>
+      </span>
+    </div>
   </div>
+
+  <div class="row"></div>
 </div>

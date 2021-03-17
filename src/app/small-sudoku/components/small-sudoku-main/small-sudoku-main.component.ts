@@ -5,16 +5,21 @@ import { GridCell } from '../../grid-cell';
  * Main Small Sudoku component
  */
 @Component({
-  selector: 'app-small-sudoku',
-  templateUrl: './small-sudoku.component.html',
-  styleUrls: ['./small-sudoku.component.scss'],
+  selector: 'app-small-sudoku-main',
+  templateUrl: './small-sudoku-main.component.html',
+  styleUrls: ['./small-sudoku-main.component.scss'],
 })
-export class SmallSudokuComponent implements OnInit {
+export class SmallSudokuMainComponent implements OnInit {
   /**
    * members
    */
   public level: number = 3; // the sudoku grid level
   sudoku: Array<Array<GridCell>>;
+
+  /**
+   * undo sequence
+   */
+  undoSequence: Array<GridCell>;
 
   /**
    * constructor
@@ -26,6 +31,9 @@ export class SmallSudokuComponent implements OnInit {
         return new GridCell(row, col, null);
       });
     });
+
+    // create undo sequence
+    this.undoSequence = [...new Array<GridCell>(0)];
   }
 
   /**
@@ -43,6 +51,9 @@ export class SmallSudokuComponent implements OnInit {
         this.sudoku[row][col] = new GridCell(row, col, val);
       });
     });
+
+    // reset the undo sequence too
+    this.undoSequence = [...new Array<GridCell>(0)];
   }
 
   /**
@@ -50,6 +61,7 @@ export class SmallSudokuComponent implements OnInit {
    */
   onLoad(): void {
     // TODO
+    this.undoSequence = [...new Array<GridCell>(0)];
   }
 
   /**
@@ -63,14 +75,27 @@ export class SmallSudokuComponent implements OnInit {
    * on undo
    */
   onUndo(): void {
-    // TODO;
+    if (this.undoSequence.length > 0) {
+      const lastUndoCell = this.undoSequence[this.undoSequence.length - 1];
+      this.sudoku[lastUndoCell.row][lastUndoCell.col] = new GridCell(lastUndoCell.row, lastUndoCell.col, null);
+
+      this.undoSequence.pop();
+    }
   }
 
   /**
    * on new cell value
    */
   onNewVal(newVal: GridCell): void {
-    this.sudoku[newVal.row][newVal.col] = newVal;
-    //console.log('received newVal ' + JSON.stringify(newVal));
+    if (newVal) {
+      // set the cell
+      this.sudoku[newVal.row][newVal.col] = newVal;
+
+      // if valid add to undo seq
+      if (newVal.val) {
+        this.undoSequence.push(new GridCell(newVal.row, newVal.col, newVal.val));
+      }
+      //console.log('received newVal ' + JSON.stringify(newVal));
+    }
   }
 }

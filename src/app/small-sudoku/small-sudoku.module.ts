@@ -5,9 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /**
  * import components
  */
-import { SmallSudokuComponent } from './components/small-sudoku/small-sudoku.component';
+import { SmallSudokuMainComponent } from './components/small-sudoku-main/small-sudoku-main.component';
 import { SmallSudokuGridComponent } from './components/small-sudoku-grid/small-sudoku-grid.component';
 import { SmallSudokuGridCellComponent } from './components/small-sudoku-grid-cell/small-sudoku-grid-cell.component';
+import { SmallSudokuUndoItemComponent } from './components/small-sudoku-undo-item/small-sudoku-undo-item.component';
 
 /**
  * Small Sudoku Module
@@ -24,13 +25,14 @@ import { SmallSudokuGridCellComponent } from './components/small-sudoku-grid-cel
   ],
   declarations: [
     // declarations
-    SmallSudokuComponent,
+    SmallSudokuMainComponent,
     SmallSudokuGridComponent,
     SmallSudokuGridCellComponent,
+    SmallSudokuUndoItemComponent,
   ],
   exports: [
     // exports
-    SmallSudokuComponent,
+    SmallSudokuMainComponent,
   ],
 })
 export class SmallSudokuModule {}

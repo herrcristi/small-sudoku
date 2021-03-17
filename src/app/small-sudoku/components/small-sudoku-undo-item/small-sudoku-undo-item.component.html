@@ -1,0 +1,11 @@
+<!-- show a small grid -->
+<table>
+  <tr *ngFor="let __l of [].constructor(level * level); let row = index">
+    <td *ngFor="let __c of [].constructor(level * level); let col = index">
+      <span *ngIf="item.row == row && item.col == col; else point_content" class="undo">
+        {{ item.val }}
+      </span>
+      <ng-template #point_content><span class="undo">&nbsp;</span></ng-template>
+    </td>
+  </tr>
+</table>

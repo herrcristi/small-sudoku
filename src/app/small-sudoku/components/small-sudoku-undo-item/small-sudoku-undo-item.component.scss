@@ -1,0 +1,31 @@
+table {
+  font-family: 'Lucida Console', 'Courier New', monospace;
+  margin: 0px auto;
+  border-spacing: 0;
+}
+tr {
+  line-height: 0.1;
+}
+tr:first-child {
+  border-top: 1px solid;
+  border-color: goldenrod;
+}
+tr:nth-child(3n) td {
+  border-bottom: 1px solid;
+  border-color: goldenrod;
+}
+td {
+  padding-bottom: 3px;
+}
+td:first-child {
+  border-left: 1px solid;
+  border-color: goldenrod;
+}
+td:nth-child(3n) {
+  border-right: 1px solid;
+  border-color: goldenrod;
+}
+.undo {
+  font-size: 8px;
+  color: blue;
+}
