@@ -1,4 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand"> Small Sudoku Helper</a>
+  <ul class="navbar-nav">
+    <li>
+      <a class="nav-link" (click)="onNew()">New</a>
+    </li>
+    <li>
+      <a class="nav-link" (click)="onLoad()">Load</a>
+    </li>
+    <li>
+      <a class="nav-link" (click)="onSave()">Save</a>
+    </li>
+    <li>
+      <a class="nav-link" (click)="onUndo()">Undo</a>
+    </li>
+  </ul>
+</nav>
 <!-- the sudoku grid -->
 <div class="container">
-  <app-small-sudoku-grid></app-small-sudoku-grid>
+  <div class="row">&nbsp;</div>
+
+  <div class="row">
+    <div class="container">
+      <app-small-sudoku-grid [sudoku]="sudoku"></app-small-sudoku-grid>
+    </div>
+  </div>
 </div>

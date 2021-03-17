@@ -10,6 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SmallSudokuComponent implements OnInit {
   /**
+   * members
+   */
+  sudoku: number = 0; // TODO make it a proper struct
+
+  /**
    * constructor
    */
   constructor() {}
@@ -18,4 +23,32 @@ export class SmallSudokuComponent implements OnInit {
    * ng on init
    */
   ngOnInit(): void {}
+
+  /**
+   * on new
+   */
+  onNew(): void {
+    this.sudoku = 1;
+  }
+
+  /**
+   * on load
+   */
+  onLoad(): void {
+    this.sudoku = 2;
+  }
+
+  /**
+   * on save
+   */
+  onSave(): void {
+    this.sudoku = 3;
+  }
+
+  /**
+   * on undo
+   */
+  onUndo(): void {
+    this.sudoku = 0;
+  }
 }
