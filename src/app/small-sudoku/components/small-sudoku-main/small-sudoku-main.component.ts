@@ -98,6 +98,9 @@ export class SmallSudokuMainComponent implements OnInit {
 
       // remove from undo sequence
       this.undoSequence.pop();
+
+      // update sudoku cell options
+      this.sudokuService.updateOptions(this.sudoku);
     }
   }
 
@@ -106,6 +109,9 @@ export class SmallSudokuMainComponent implements OnInit {
    */
   onNewVal(newVal: GridCell): void {
     if (newVal) {
+      // validate cell first
+      newVal = this.sudokuService.getValidatedCell(this.sudoku, newVal);
+
       // set the cell
       this.sudoku[newVal.row][newVal.col] = newVal;
 

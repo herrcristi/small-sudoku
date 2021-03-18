@@ -1,6 +1,12 @@
-&nbsp;
+<span
+  *ngFor="let option of cell.options; let i = index"
+  [class]="{ option: 1, 'single-option': cell.options.length == 1 }"
+>
+  {{ option }}&nbsp;
+</span>
+
 <br />
 <!-- if value is set just display it -->
-<div *ngIf="cell.val; else input_content" class="cell">{{ cell.val }}</div>
+<div *ngIf="cell.val; else input_content" [class]="{ cell: 1, 'cell-invalid': !cell.isValid }">{{ cell.val }}</div>
 <!-- else add an input -->
 <ng-template #input_content> <input type="text" [formControl]="control" /></ng-template>

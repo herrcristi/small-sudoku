@@ -92,8 +92,8 @@ export class SmallSudokuGridCellComponent implements OnInit, OnDestroy, OnChange
    * on value changed
    */
   onValChanged(newVal: number): void {
-    // validate first TODO remove 0-10 validation and instead use a class for errors
-    newVal = isNaN(newVal) || newVal <= 0 || newVal >= 10 ? null : newVal;
+    // check if is a good number
+    newVal = isNaN(newVal) ? null : newVal;
 
     // trigger the change event
     const newCell: GridCell = new GridCell(this.cell.row, this.cell.col, newVal);

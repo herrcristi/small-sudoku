@@ -9,6 +9,21 @@ input,
   border: 0px solid goldenrod;
 }
 
+.cell-invalid {
+  background-color: rgb(228, 170, 170);
+}
+
+.option {
+  color: blue;
+  font-size: 8px;
+  line-height: 0.1;
+  text-align: left;
+}
+
+.single-option {
+  background-color: #def1d8;
+}
+
 input:focus {
   outline: none !important;
   border: 1px solid goldenrod;
