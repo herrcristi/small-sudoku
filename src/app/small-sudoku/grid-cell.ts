@@ -12,7 +12,7 @@ export class GridCell {
   public isSet: boolean; //     if value is proper set
   public isValid: boolean; //   if the value is valid (even if it is set)
 
-  public options: number[]; //  the restricted options from where to choose from (computed in the service)
+  public possibilities: number[]; //  the restricted possibilities from where to choose from (computed in the service)
 
   /**
    * constructor
@@ -28,11 +28,11 @@ export class GridCell {
   }
 
   /**
-   * set options
+   * set possibilities
    */
-  setOptions(options: number[]): void {
-    //this.options = [...options];
-    this.options = options;
+  setPossibilities(possibilities: number[]): void {
+    //this.possibilities = [...possibilities];
+    this.possibilities = possibilities;
   }
 
   /**
@@ -43,9 +43,9 @@ export class GridCell {
   }
 
   /**
-   * set is valid only if current val is among the current options
+   * set is valid only if current val is among the current possibilities
    */
-  setIsValidIfValIsInCurrentOptions(): void {
-    this.setIsValid(this.options && this.options.indexOf(this.val) !== -1 ? true : false);
+  setIsValidIfValIsInCurrentPossibilities(): void {
+    this.setIsValid(this.possibilities && this.possibilities.indexOf(this.val) !== -1 ? true : false);
   }
 }

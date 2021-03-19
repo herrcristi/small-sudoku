@@ -1,6 +1,6 @@
 <span
-  *ngFor="let option of cell.options; let i = index"
-  [class]="{ option: 1, 'single-option': cell.options.length == 1 }"
+  *ngFor="let option of cell.possibilities; let i = index"
+  [class]="{ option: 1, 'single-option': cell.possibilities.length == 1 }"
 >
   {{ option }}&nbsp;
 </span>

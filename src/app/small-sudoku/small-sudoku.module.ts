@@ -19,7 +19,7 @@ import { SmallSudokuService } from './small-sudoku.service';
  * Small Sudoku Module
  *
  * which contains all the components to help solve a sudoku
- * including the service to help with the remaining options
+ * including the service to help with the remaining possibilities
  */
 @NgModule({
   imports: [

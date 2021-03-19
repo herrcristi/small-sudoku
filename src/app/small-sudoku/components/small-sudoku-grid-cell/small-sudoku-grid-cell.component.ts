@@ -44,7 +44,7 @@ export class SmallSudokuGridCellComponent implements OnInit, OnDestroy, OnChange
             // since the value is changed by the parent
             // set the formControl to proper value
             // and inform not to emit a new event
-            //console.log('changed ' + JSON.stringify(changes[propName].currentValue));
+            console.log('changed ' + JSON.stringify(changes[propName].currentValue));
             if (this.control) {
               const newCellVal = (changes[propName].currentValue as GridCell).val;
               this.control.setValue(newCellVal, { emitEvent: false });
@@ -66,7 +66,7 @@ export class SmallSudokuGridCellComponent implements OnInit, OnDestroy, OnChange
     this.controlSubscription$ = this.control.valueChanges
       .pipe(debounceTime(this.debounce), distinctUntilChanged())
       .subscribe((newVal) => {
-        //console.log('subscription ' + newVal);
+        console.log('input changed value ' + newVal);
 
         // trigger the change event
         this.onValChanged(+newVal);

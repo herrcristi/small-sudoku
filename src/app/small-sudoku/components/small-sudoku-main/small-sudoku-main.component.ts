@@ -39,8 +39,8 @@ export class SmallSudokuMainComponent implements OnInit {
     // create undo sequence
     this.undoSequence = [...new Array<GridCell>(0)];
 
-    // update sudoku cell options
-    this.sudokuService.updateOptions(this.sudoku);
+    // update sudoku cell possibilities
+    this.sudokuService.updatePossibilities(this.sudoku);
   }
 
   /**
@@ -62,8 +62,8 @@ export class SmallSudokuMainComponent implements OnInit {
     // reset the undo sequence too
     this.undoSequence = [...new Array<GridCell>(0)];
 
-    // update sudoku cell options
-    this.sudokuService.updateOptions(this.sudoku);
+    // update sudoku cell possibilities
+    this.sudokuService.updatePossibilities(this.sudoku);
   }
 
   /**
@@ -76,8 +76,8 @@ export class SmallSudokuMainComponent implements OnInit {
     // reset undo sequence
     this.undoSequence = [...new Array<GridCell>(0)];
 
-    // update sudoku cell options
-    this.sudokuService.updateOptions(this.sudoku);
+    // update sudoku cell possibilities
+    this.sudokuService.updatePossibilities(this.sudoku);
   }
 
   /**
@@ -99,8 +99,8 @@ export class SmallSudokuMainComponent implements OnInit {
       // remove from undo sequence
       this.undoSequence.pop();
 
-      // update sudoku cell options
-      this.sudokuService.updateOptions(this.sudoku);
+      // update sudoku cell possibilities
+      this.sudokuService.updatePossibilities(this.sudoku);
     }
   }
 
@@ -119,8 +119,8 @@ export class SmallSudokuMainComponent implements OnInit {
         // if valid add to undo seq
         this.undoSequence.push(new GridCell(newVal.row, newVal.col, newVal.val));
 
-        // update sudoku cell options
-        this.sudokuService.updateOptions(this.sudoku);
+        // update sudoku cell possibilities
+        this.sudokuService.updatePossibilities(this.sudoku);
       }
 
       //console.log('received newVal ' + JSON.stringify(newVal));
